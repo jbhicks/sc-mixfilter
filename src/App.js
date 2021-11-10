@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios.get('http://localhost:8081')
-      .then(res => {console.log(res.data)});
+      .then(res => {setData(res.data)});
   }, []);
 
   return (
