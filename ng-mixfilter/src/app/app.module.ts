@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +19,9 @@ import { MatSliderModule } from '@angular/material/slider';
     MatCardModule,
     MatChipsModule,
     MatSliderModule,
+    MatIconModule,
+    FormsModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

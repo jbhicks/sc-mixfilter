@@ -1,44 +1,54 @@
 <p>
   <mat-toolbar color="primary">
     <span>{{ title }}</span>
-    <span class="fill-remaining-space">
-      <mat-slider aria-label="unit(s)"></mat-slider>
+    <span class="minlength">
+      <mat-slider
+        [min]="min"
+        [max]="max"
+        [step]="1"
+        (input)="onMinLengthChange($event.value)"
+        [(ngModel)]="minLength"
+      ></mat-slider>
+      {{ duration }}
     </span>
   </mat-toolbar>
 </p>
-<!-- loop over tracks and display them in a media card -->
-<mat-card class="card" *ngFor="let track of tracks">
-  <mat-card-title-group>
-    <mat-card-title>
+<!-- display grid of tracks in a media card -->
+<div class="content" fxLayout="row wrap">
+  <mat-card
+    (click)="handleCardClick(track)"
+    class="card"
+    fxFlex="50%"
+    *ngFor="let track of filteredTracks"
+    href="{ track.track.permalink_url }"
+  >
+    <mat-card-header>
       <img matCardAvatar src="{{ track.track.user.avatar_url }}" />
-      {{ track.track.title }}
-    </mat-card-title>
-    <img
-      mat-card-sm-image
-      src="{{ track.track.artwork_url }}"
-      alt="{{ track.track.title }}"
-    />
-    <mat-card-subtitle>{{ track.track.user.username }}</mat-card-subtitle>
-  </mat-card-title-group>
-  <mat-card-footer>
-    <mat-chip-list aria-label="Track attributes">
-      <mat-chip color="primary" selected="true">
-        {{ track.track.genre }}
-      </mat-chip>
-      <mat-chip color="primary">{{
-        track.track.duration | date: "mm:ss"
-      }}</mat-chip>
-      <mat-chip color="primary"
-        >{{ track.track.playback_count }} plays</mat-chip
-      >
-      <mat-chip color="primary"
-        >{{ track.track.reposts_count }} reposts</mat-chip
-      >
-    </mat-chip-list>
-  </mat-card-footer>
-  <mat-card-actions>
-    <audio controls>
-      <source src="{{ track.track.url }}" type="audio/mpeg" />
-    </audio>
-  </mat-card-actions>
-</mat-card>
+      <mat-card-title>{{ track.track.title }}</mat-card-title>
+      <mat-card-subtitle>{{ track.track.user.username }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <img mat-card-md-image src="{{ track.track.artwork_url }}" />
+      <p class="line-clamp">
+        {{ track.track.description }}
+      </p>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-chip-list aria-label="Track attributes">
+        <mat-chip color="primary" selected="true">
+          #{{ track.track.genre }}
+        </mat-chip>
+        <mat-chip color="primary">{{
+          parseMillisecondsIntoReadableTime(track.track.duration)
+        }}</mat-chip>
+        <mat-chip color="primary"
+          >{{ track.track.playback_count }} plays</mat-chip
+        >
+        <mat-chip color="primary"
+          >{{ track.track.reposts_count }} reposts</mat-chip
+        >
+      </mat-chip-list>
+    </mat-card-footer>
+    <mat-card-actions> </mat-card-actions>
+  </mat-card>
+</div>

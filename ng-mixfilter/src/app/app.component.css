@@ -1,8 +1,43 @@
+.content {
+  padding: 16px;
+}
+
 .card {
-  max-width: 50%;
+  max-width: 100%;
   margin-bottom: 8px;
+  overflow: "hidden";
+  cursor: pointer;
+}
+
+.card-content {
+  display: flex;
 }
 
 mat-slider {
   width: 300px;
+}
+
+.header-image {
+  background-size: cover;
+}
+
+.audio-player {
+  position: relative;
+  padding-left: 50px;
+  display: inline;
+}
+
+.minlength {
+  padding-left: 50px;
+}
+
+img {
+  display: inline;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
