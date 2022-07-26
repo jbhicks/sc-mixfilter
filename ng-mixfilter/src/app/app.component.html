@@ -2,6 +2,7 @@
   <mat-toolbar color="primary">
     <span>{{ title }}</span>
     <span class="minlength">
+      <span>Min Length: {{parseMillisecondsIntoReadableTime(minLength)}} </span>
       <mat-slider
         [min]="min"
         [max]="max"
@@ -9,7 +10,7 @@
         (input)="onMinLengthChange($event.value)"
         [(ngModel)]="minLength"
       ></mat-slider>
-      {{ duration }}
+      <span>Max Length: {{parseMillisecondsIntoReadableTime(max)}} </span>
     </span>
   </mat-toolbar>
 </p>
@@ -22,25 +23,27 @@
     *ngFor="let track of filteredTracks"
     href="{ track.track.permalink_url }"
   >
-    <mat-card-header>
+    <mat-card-header style="display:inline-flex">
       <img matCardAvatar src="{{ track.track.user.avatar_url }}" />
       <mat-card-title>{{ track.track.title }}</mat-card-title>
       <mat-card-subtitle>{{ track.track.user.username }}</mat-card-subtitle>
     </mat-card-header>
+
     <mat-card-content class="card-content">
       <img mat-card-md-image src="{{ track.track.artwork_url }}" />
       <p class="line-clamp">
         {{ track.track.description }}
       </p>
     </mat-card-content>
+
     <mat-card-footer>
       <mat-chip-list aria-label="Track attributes">
         <mat-chip color="primary" selected="true">
           #{{ track.track.genre }}
         </mat-chip>
-        <mat-chip color="primary">{{
-          parseMillisecondsIntoReadableTime(track.track.duration)
-        }}</mat-chip>
+        <mat-chip color="primary">
+          {{parseMillisecondsIntoReadableTime(track.track.duration)}}
+        </mat-chip>
         <mat-chip color="primary"
           >{{ track.track.playback_count }} plays</mat-chip
         >
@@ -49,6 +52,7 @@
         >
       </mat-chip-list>
     </mat-card-footer>
+
     <mat-card-actions> </mat-card-actions>
   </mat-card>
 </div>

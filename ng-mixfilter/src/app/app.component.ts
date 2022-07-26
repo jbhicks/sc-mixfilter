@@ -12,10 +12,9 @@ export class AppComponent implements OnInit {
   tracks: any = [];
   filteredTracks: any = [];
   min = 0;
-  max = 6171500;
+  max = 12171500;
   showTicks = true;
   minLength = 0;
-  duration: string = '';
 
   ngOnInit(): void {
     axios.get('http://localhost:8081').then((res) => {
@@ -29,7 +28,6 @@ export class AppComponent implements OnInit {
 
   onMinLengthChange(value: any) {
     this.minLength = value;
-    this.duration = this.parseMillisecondsIntoReadableTime(value);
     const tracks = this.tracks.filter((track: any) => {
       return track.track.duration > value;
     });
@@ -67,5 +65,5 @@ export class AppComponent implements OnInit {
     var s = absoluteSeconds > 9 ? absoluteSeconds : '0' + absoluteSeconds;
 
     return h + ':' + m + ':' + s;
-  }
+  } 
 }
